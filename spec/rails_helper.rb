@@ -6,6 +6,39 @@ require_relative '../config/environment'
 abort('The Rails environment is running in production mode!') if Rails.env.production?
 require 'rspec/rails'
 # Add additional requires below this line. Rails is not loaded until this point!
+def login_user
+  @user = User.create(
+    name: 'George',
+    email: 'correct@email.com',
+    password: 'correctpassword',
+    confirmed_at: Time.now
+  )
+  @recipe = Recipe.create(
+    user_id: @user.id,
+    name: 'Cake',
+    preparation_time: 50,
+    cooking_time: 90,
+    description: 'This is a really good cake!',
+    public: true
+  )
+  @food = Food.create(
+    name: 'Egg',
+    measurement_unit: 'Unit',
+    price: 1,
+    user_id: @user.id
+  )
+  @ingredient = RecipeFood.create(
+    quantity: '5',
+    created_at: Time.now,
+    updated_at: Time.now,
+    food_id: @food.id,
+    recipe_id: @recipe.id
+  )
+  visit user_session_path
+  fill_in 'Email', with: 'correct@email.com'
+  fill_in 'Password', with: 'correctpassword'
+  click_button 'Log in'
+end
 
 # Requires supporting ruby files with custom matchers and macros, etc, in
 # spec/support/ and its subdirectories. Files matching `spec/**/*_spec.rb` are
