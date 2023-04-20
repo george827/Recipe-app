@@ -1,0 +1,38 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+<div class="container-fluid">
+  <% if current_user %>
+  <p class="navbar-brand">Welcome <%= (current_user.name).upcase %></p>
+  <% end %>
+  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+  </button>
+    <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <% if user_signed_in? %>
+          <li class="nav-item">
+            <%= link_to "Sign Out", destroy_user_session_path,  data: { turbo_method: :delete, turbo_confirm: 'Are you sure?' }, class: "nav-link" %>
+          </li>
+          <li class="nav-item">
+            <%= link_to "Foods",  foods_path, class: "nav-link" %>
+          </li>
+          </li>
+            <%= link_to "Recipes",  recipes_path, class: "nav-link" %>
+          </li>
+          </li>
+            <%= link_to "Public Recipes", public_recipes_path, class: "nav-link" %>
+          </li>
+          </li>
+          <%= link_to "Shopping list", shopping_list_index_path, class: "nav-link" %>
+        </li>
+        <% else %>
+          <li class="nav-item">
+            <%= link_to "Sign Up", new_user_registration_path, class: "nav-link" %>
+          </li>
+          <li class="nav-item">
+            <%= link_to "Sign IN", new_user_session_path, class: "nav-link" %>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+</nav>

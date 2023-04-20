@@ -13,3 +13,18 @@
  *= require_tree .
  *= require_self
  */
+.food-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: end;
+}
+
+.recipe-container {
+  display: flex;
+  flex-direction: row;
+}
+
+.link {
+  text-decoration: none;
+  color: black;
+}

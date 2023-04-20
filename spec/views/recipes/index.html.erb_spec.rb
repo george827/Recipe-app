@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'recipes/index.html.erb', type: :view do
+RSpec.describe 'recipes/index.html.erb', type: :feature do
   describe 'integration tests for recipes page' do
     before(:each) do
       @user = User.create(name: 'sam', email: 'mugisha@gmail.com', password: '123456')
