@@ -11,7 +11,7 @@ class RecipeFoodsController < ApplicationController
     @recipe_food.recipe_id = @recipe.id
 
     if @recipe_food.save
-      redirect_to recipe_path(params[:recipe_id]), notice: "recipe_food was successfully created!"
+      redirect_to recipe_path(params[:recipe_id]), notice: 'recipe_food was successfully created!'
     else
       redirect_to recipe_path(params[:recipe_id]), notice: 'recipe_food could not be created!'
     end
@@ -35,7 +35,7 @@ class RecipeFoodsController < ApplicationController
   def destroy
     @recipe_food = RecipeFood.includes(:food).find(params[:id])
     @recipe_food.destroy
-    redirect_to recipe_path(params[:recipe_id]), notice: "recipe_food  deleted successfully!"
+    redirect_to recipe_path(params[:recipe_id]), notice: 'recipe_food  deleted successfully!'
   end
 
   private
