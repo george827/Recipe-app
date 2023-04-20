@@ -75,6 +75,7 @@ GEM
       msgpack (~> 1.2)
     builder (3.2.4)
     cancan (1.6.10)
+    cancancan (3.5.0)
     capybara (3.39.0)
       addressable
       matrix
@@ -112,6 +113,10 @@ GEM
       actionview (>= 5.0.0)
       activesupport (>= 5.0.0)
     json (2.6.3)
+    launchy (2.5.2)
+      addressable (~> 2.8)
+    letter_opener (1.8.1)
+      launchy (>= 2.2, < 3)
     loofah (2.20.0)
       crass (~> 1.0.2)
       nokogiri (>= 1.5.9)
@@ -164,6 +169,10 @@ GEM
       activesupport (= 7.0.4.3)
       bundler (>= 1.15.0)
       railties (= 7.0.4.3)
+    rails-controller-testing (1.0.5)
+      actionpack (>= 5.0.1.rc1)
+      actionview (>= 5.0.1.rc1)
+      activesupport (>= 5.0.1.rc1)
     rails-dom-testing (2.0.3)
       activesupport (>= 4.2.0)
       nokogiri (>= 1.6)
@@ -265,14 +274,17 @@ PLATFORMS
 DEPENDENCIES
   bootsnap
   cancan
+  cancancan
   capybara
   debug
   devise
   importmap-rails
   jbuilder
+  letter_opener
   pg (~> 1.1)
   puma (~> 5.0)
   rails (~> 7.0.4, >= 7.0.4.3)
+  rails-controller-testing
   rspec-rails
   rubocop (>= 1.0, < 2.0)
   selenium-webdriver
