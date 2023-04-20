@@ -1,0 +1,33 @@
+<div>
+  <% if @recipes.length !=0 %>
+    <h1 class="">My recepies</h1>
+    <div class="food-btn m-4">
+      <%= link_to "Add new recipe", new_recipe_path, class: "btn btn-primary" %>
+    </div>
+
+    <% @recipes.each do |recipe| %>
+      <div class="card m-4">
+        <div class="recipe-container justify-content-around">
+          <div class="recipe-name">
+            <%= link_to recipe_path(recipe.id), class: "nav-link m-4" do %>
+              <h3>
+                <%= recipe.name %>
+              </h3>
+            <% end %>
+              <%= button_to "Remove", recipe_path(recipe.id), method: :delete, class: 'btn btn-danger m-4' if can? :destroy, recipe %>
+          </div>
+
+          <div class="">
+            <p class="m-4"><%= truncate recipe.description, length: 240 %></p>
+          </div>
+        </div>
+      </div>
+    <% end %>
+    <% else %>
+      <h1 class="text-center m-4">There are no recipes</h1>
+      <div class="text-center m-4">
+        <%= link_to "Add new recipe", new_recipe_path, class: "btn btn-primary" %>
+      </div>
+    <% end %>
+
+</div>

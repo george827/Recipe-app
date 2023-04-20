@@ -1,0 +1,23 @@
+<div class="container">
+    <h1 class="text-center m-4 py-4 text-5xl">Public Recipes</h1>
+    <ul class="flex flex-col gap-4">
+      <% @recipes.each do |recipe| %>
+        <li class="card p-3 m-4">
+          <%= link_to recipe_path(recipe.id), class: "link" do  %>
+            <div class="recipe-container justify-content-around link">
+              <div class = ""> 
+                <h3 class=""><%= recipe.name %></h3>
+                <h3>by <span class=""><%= recipe.user.name %></span></h3>
+              </div>
+
+              <div class="">
+                <h3>Total food items: <span class=""><%= recipe.foods.count %></span></h3>
+                <h3>Total price: <span class=""> $<%= recipe.recipe_foods.includes(:food).map {|r| r.food.price.to_i * r.quantity.to_i }.sum %></span></h3>
+
+              </div>
+            </div>
+          <% end %>
+        </li>
+      <% end %>
+    </ul>
+</div>

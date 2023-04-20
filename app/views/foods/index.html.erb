@@ -1,0 +1,33 @@
+<div>
+  <h1>Listing foods</h1>
+<div class="text-center m-1">
+<div class="food-btn m-1">
+    <%= link_to "Add new food", new_food_path, class: "btn btn-primary" %>
+<div>
+<br/>
+
+</div>
+  <table class = "table table-hover">
+  <thead>
+    <tr>
+      <th scope="col">Food</th>
+      <th scope="col">Measurement Unit</th>
+      <th scope="col">Unit Price</th>
+      <th scope="col">Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @foods.each do |food| %>     
+      <tr>
+        <td><%= food.name %></td>
+        <td><%= food.measurement_unit %></td>
+        <td><%= food.price %></td>
+        <td>
+          <%= button_to "Delete", food, method: :delete, class: "btn btn-danger" %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+  </table>
+
+</div>

@@ -1,0 +1,72 @@
+<div class="container mx-auto m-3">
+  <div class="block p-3 card m-2">
+    <h5 class="mb-16 text-center"><%= @recipe.name %></h5>
+    <div class="flex flex-col md:flex-row">
+      <div class="flex-1 text-center">
+        <h5 class="mb-4 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+          Preparation time: <%= (@recipe.preparation_time)/60 %> hr <%= (@recipe.preparation_time)%60 > 0 ? "#{(@recipe.preparation_time)%60} min": " " %>
+        </h5>
+        <h5 class="mb-4 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+          Cooking time: <%= (@recipe.cooking_time)/60 %> hr <%= (@recipe.cooking_time)%60 > 0 ? "#{(@recipe.cooking_time)%60} min": " " %>
+        </h5>
+      </div>
+      <div class="text-center">
+        <% if can? :manage, @recipe %>
+          <%= button_to "Make it #{@recipe.public ? 'private' : 'public'}", recipe_path(@recipe.id), class: @recipe.public ? 'btn btn-warning' : 'btn btn-success', method: :patch %>
+        <% end %>
+      </div>
+    </div>
+    <div class="text-center">
+      <p class="mb-4 text-1xl font-bold tracking-tight text-gray-900 dark:text-white">
+        Descrition: <%= @recipe.description %>
+      </p>
+    </div>
+    <div class="flex flex-col md:flex-row py-4">
+      <div class="flex-1 text-center py-4">
+      <% if can? :manage, @recipe %>
+        <button class="btn btn-info">
+        <%= link_to "Generate shoping list", shopping_list_index_path, class: "link"%>
+        </button>
+        <% end %>
+      </div>
+      <div class="flex-1 text-center py-4">
+        <% if can? :manage, @recipe %>
+          <%= link_to "Add ingredient", new_recipe_recipe_food_path(@recipe.id), class: "btn btn-secondary" %>
+        <% end %>
+      </div>
+    </div>
+    <hr class="my-8">
+    <div>
+      <% if @ingridients.present? %>
+        <table class="table">
+          <thead class="bg-gray-800">
+            <tr class="h-10">
+              <th class="p-1">Food</th>
+              <th class="p-1">Quanity</th>
+              <th class="p-1">Price</th>
+              <th class="p-1">Value</th>
+              <th class="p-1"></th>
+              <th class="p-1"></th>
+            </tr>
+          </thead>
+          <tbody class="">
+            <% @ingridients.each do |ingredient| %>
+              <tr class="h-10">
+                <td class="p-1"><%= ingredient.food.name %></td>
+                <td class="p-1"><%= ingredient.quantity %> <%= ingredient.food.measurement_unit %></td>
+                <td class="p-1">$<%= ingredient.food.price %></td>
+                <td class="p-1">$<%= ingredient.food.price * ingredient.quantity || 0 %></td>
+                <td class="p-1">
+                  <%= link_to "Modify", edit_recipe_recipe_food_path(recipe_id: @recipe.id, id: ingredient.id), class: 'btn btn-success' if can? :manage, @recipe %>
+                </td>
+                <td class="p-1">
+                  <%= button_to "Delete", recipe_recipe_food_path(recipe_id: @recipe.id, id: ingredient.id), method: :delete, class: 'btn btn-danger' if can? :manage, @recipe%>
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      <% end %>
+    </div>
+  </div>
+</div>
