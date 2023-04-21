@@ -1,35 +1,45 @@
 <div class="container mx-auto m-3">
-  <div class="block p-3 card m-2">
-    <h5 class="mb-16 text-center"><%= @recipe.name %></h5>
-    <div class="flex flex-col md:flex-row">
-      <div class="flex-1 text-center">
-        <h5 class="mb-4 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+  <div class="p-3 card m-2">
+    <h5 class="text-center"><%= @recipe.name %></h5>
+    <div class="d-flex flex-row p-2 justify-content-between">
+      <div class="d-flex flex-column">
+        <h5 class="m-3">
           Preparation time: <%= (@recipe.preparation_time)/60 %> hr <%= (@recipe.preparation_time)%60 > 0 ? "#{(@recipe.preparation_time)%60} min": " " %>
         </h5>
-        <h5 class="mb-4 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+        <h5 class="m-3 font-bold">
           Cooking time: <%= (@recipe.cooking_time)/60 %> hr <%= (@recipe.cooking_time)%60 > 0 ? "#{(@recipe.cooking_time)%60} min": " " %>
         </h5>
       </div>
-      <div class="text-center">
+
+      <div class="d-flex flex-column m-2">
         <% if can? :manage, @recipe %>
           <%= button_to "Make it #{@recipe.public ? 'private' : 'public'}", recipe_path(@recipe.id), class: @recipe.public ? 'btn btn-warning' : 'btn btn-success', method: :patch %>
         <% end %>
+
+          <label class="switch mt-4">
+            <input type="checkbox",recipe_path(@recipe.id), method: :patch>
+            <span class="slider round"></span>
+          </label>
+
       </div>
+
     </div>
-    <div class="text-center">
-      <p class="mb-4 text-1xl font-bold tracking-tight text-gray-900 dark:text-white">
+
+    <div class="d-flex flex-column justify-content-start">
+      <p class="p-2 ms-3">
         Descrition: <%= @recipe.description %>
       </p>
     </div>
-    <div class="flex flex-col md:flex-row py-4">
-      <div class="flex-1 text-center py-4">
-      <% if can? :manage, @recipe %>
-        <button class="btn btn-info">
-        <%= link_to "Generate shoping list", shopping_list_index_path, class: "link"%>
-        </button>
+
+    <div class="d-flex flex-row mt-2 justify-content-between p-3">
+      <div class="">
+        <% if can? :manage, @recipe %>
+          <button class="btn btn-info">
+            <%= link_to "Generate shoping list", shopping_list_index_path, class: "link"%>
+          </button>
         <% end %>
       </div>
-      <div class="flex-1 text-center py-4">
+      <div class="">
         <% if can? :manage, @recipe %>
           <%= link_to "Add ingredient", new_recipe_recipe_food_path(@recipe.id), class: "btn btn-secondary" %>
         <% end %>
@@ -45,7 +55,7 @@
               <th class="p-1">Quanity</th>
               <th class="p-1">Price</th>
               <th class="p-1">Value</th>
-              <th class="p-1"></th>
+              <th class="p-1">Action</th>
               <th class="p-1"></th>
             </tr>
           </thead>
